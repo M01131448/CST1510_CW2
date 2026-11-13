@@ -16,7 +16,7 @@ RENAME = {
 }
 
 KEEP = ["name", "language", "stars", "total_open_issues", "total_forks"]
-MUST_HAVE = ["name"]
+MUST_HAVE = ["name", "language"]
 
 RAW_FILE = Path(__file__).parent / "DATA" / "raw.csv"
 
