@@ -11,11 +11,11 @@ RECORDS_KEY = None
 
 RENAME = {
     "stargazers_count": "stars",
-    "open_issues_count": "open_issues",
-    "forks_count": "forks"
+    "open_issues_count": "total_open_issues",
+    "forks_count": "total_forks"
 }
 
-KEEP = ["name", "language", "stars", "open_issues", "forks"]
+KEEP = ["name", "language", "stars", "total_open_issues", "total_forks"]
 MUST_HAVE = ["name"]
 
 RAW_FILE = Path(__file__).parent / "DATA" / "raw.csv"
