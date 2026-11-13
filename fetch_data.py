@@ -22,6 +22,7 @@ RAW_FILE = Path(__file__).parent / "DATA" / "raw.csv"
 
 def get_data(url, params):
     """Ask the API for data. Returns the JSON reply, or None if something went wrong."""
+    #Requests the raw JSON data from the web address (github api).
     try:
         response = requests.get(url, params=params, timeout=15)
         response.raise_for_status()
@@ -33,19 +34,24 @@ def get_data(url, params):
 def make_table(data, records_key):
     """Turn the JSON reply into a pandas table."""
     records = data[records_key] if records_key else data
+    #Flattens the nested JSON structure into a 2D table with rows and columns.
     return pd.json_normalize(records, sep="_")
 
 def tidy_data(df):
     """Rename, keep and clean the columns."""
+    #Renames confusing column titles to simpler ones.
     df = df.rename(columns=RENAME)
-
+    #Filters the table to keep only the specific columns we listed in the keep variable.
     df = df[KEEP]
+    #Drops any rows from the data that are missing essential information
     df = df.dropna(subset=MUST_HAVE)
+    #returns the final, cleaned table back to the main program.
     return df
 
 def save_data(df, path):
     """Save the table as a CSV file."""
     path.parent.mkdir(exist_ok=True)
+    #Converts cleaned table into a CSV file and saves it without the row numbers on the side.
     df.to_csv(path, index=False)
     print(f"Saved {len(df)} rows to {path}")
 
