@@ -1,3 +1,5 @@
+"""Name: Haidar Tajoo"""
+
 from pathlib import Path
 
 import bcrypt
